@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd-Free Travel Companion</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Fonts & Colors */
+        body, h2, h5 {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        .navbar {
+            background-color: #004aad;
+            padding: 1rem 0;
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #ffffff !important;
+        }
+        .hero-section, .about-section, .explore-section, .signin-section {
+            display: none;
+            padding: 40px;
+        }
+        .hero-section {
+            background: url('https://source.unsplash.com/1600x400/?nature,travel') no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #004aad;
+            margin-bottom: 20px;
+        }
+        .form-control, .btn {
+            margin-top: 20px;
+        }
+        .active-section {
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showSection('home')">Crowd-Free Travel Companion</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('explore')">Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('about')">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('signin')">Sign In</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero-section active-section">
+        <h1>Welcome to the Crowd-Free Travel Companion</h1>
+        <p class="lead">Discover hidden gems and travel safely with peace of mind</p>
+        <h1>Get Started</h1>
+    </section>
+
+    <!-- Explore Section -->
+    <section id="explore" class="explore-section container mt-5">
+        <h2 class="section-title">Explore Destinations</h2>
+        <div class="input-group mb-3">
+            <input id="searchInput" type="text" class="form-control" placeholder="Search destinations...">
+            <button class="btn btn-primary" type="button" onclick="filterLocations()">Search</button>
+        </div>
+        <div class="row" id="locationCards">
+            <!-- Sample Cards -->
+            <div class="col-md-4" data-name="hidden beach">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Hidden Beach">
+                    <div class="card-body">
+                        <h5 class="card-title">Hidden Beach</h5>
+                        <p class="card-text">A secluded beach perfect for relaxing away from the crowds.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-name="mountain peak">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Mountain Peak">
+                    <div class="card-body">
+                        <h5 class="card-title">Mountain Peak</h5>
+                        <p class="card-text">A breathtaking view from the top of the mountain.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more cards here -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section container mt-5">
+        <h2 class="section-title">About Us</h2>
+        <p class="lead">Learn more about our mission and vision</p>
+        <button class="btn btn-primary" type="button" onclick="showSection('home')">Back to Home</button>
+    </section>
+
+    <!-- Sign In Section -->
+    <section id="signin" class="signin-section container mt-5">
+        <h2 class="section-title">Sign In</h2>
+        <p class="lead">Log in to access exclusive features</p>
+        <form>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section) => {
+                section.classList.remove('active-section');
+            });
+            document.getElementById(sectionId).classList.add('active-section');
+        }
+
+        function filterLocations() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const locationCards = document.querySelectorAll('#locationCards > div');
+            locationCards.forEach((card) => {
+                const cardName = card.getAttribute('data-name').toLowerCase();
+                if (cardName.includes(searchInput)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
